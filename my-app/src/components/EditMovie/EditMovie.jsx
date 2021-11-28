@@ -9,7 +9,7 @@ const EditMovie = () => {
 
   const movie = location.state;
   const { title, year, imdbRating, genres, storyline } = movie;
-  const genre=genres.toString();
+  const genre = genres.toString();
   const [formvalue, setformvalue] = useState({
     title: title,
     year: year,
@@ -17,19 +17,18 @@ const EditMovie = () => {
     genres: genre,
     storyline: storyline,
   });
-// const [data, setdata] = useState(null)
   const gotofunction = (e) => {
     const { name, value } = e.target;
     setformvalue((previews) => ({ ...previews, [name]: value }));
-};
+  };
   const submitData = async (e) => {
     e.preventDefault();
-    await axios.put("/api/updatemovie/"+id,formvalue);
+    await axios.put("/api/updatemovie/" + id, formvalue);
     navigate("/");
   };
   return (
     <div className="container my-2">
-      <form className="row g-3" >
+      <form className="row g-3">
         <div className="col-12">
           <label htmlFor="inputAddress" className="form-label">
             Movie Title
@@ -108,7 +107,11 @@ const EditMovie = () => {
         </div>
 
         <div className="col-12">
-          <button type="button" className="btn btn-primary" onClick={(e) => submitData(e)}>
+          <button
+            type="button"
+            className="btn btn-dark"
+            onClick={(e) => submitData(e)}
+          >
             Save Details
           </button>
         </div>

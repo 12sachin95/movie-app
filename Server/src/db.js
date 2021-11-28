@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 export const Connection = async () => {
-  const url =process.env.MONGO_URL
+  const url = process.env.MONGO_URL;
   try {
     await mongoose.connect(url, {
       useNewUrlParser: true,

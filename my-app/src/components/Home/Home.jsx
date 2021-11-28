@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import MovieCard from "../movie_card/MovieCard";
+import { categories } from "../../Categories";
 import axios from "axios";
 import "./home.scss";
 
@@ -8,6 +9,7 @@ const Home = () => {
   const [movieslist, setmovieslist] = useState([]);
   const [category, setcategory] = useState("");
   const [FilteredMovies, setFilteredMovies] = useState([]);
+
   useEffect(() => {
     const getMovies = async () => {
       const Movies = await axios.get("/api/getmovies");
@@ -15,23 +17,6 @@ const Home = () => {
     };
     getMovies();
   }, []);
-
-  const categories = [
-    "Action",
-    "Animation",
-    "Adventure",
-    "Biography",
-    "Comedy",
-    "Crime",
-    "Drama",
-    "Fantasy",
-    "History",
-    "Horror",
-    "Musical",
-    "Romance",
-    "Sci-Fi",
-    "Thriller",
-  ];
 
   const filtermovies = (value) => {
     const filtred = movieslist.filter((movie) => movie.genres.includes(value));
@@ -79,7 +64,10 @@ const Home = () => {
           {tab === "All Movie" ? (
             <>
               {movieslist.map((cvalue) => (
-                <div className="col-6 col-sm-4 col-md-3 col-lg-2" key={cvalue.id}>
+                <div
+                  className="col-6 col-sm-4 col-md-3 col-lg-2"
+                  key={cvalue.id}
+                >
                   <MovieCard movies={cvalue} />
                 </div>
               ))}
@@ -87,7 +75,10 @@ const Home = () => {
           ) : (
             <>
               {FilteredMovies.map((cvalue) => (
-                <div className="col-6 col-sm-4 col-md-3 col-lg-2" key={cvalue.id}>
+                <div
+                  className="col-6 col-sm-4 col-md-3 col-lg-2"
+                  key={cvalue.id}
+                >
                   <MovieCard movies={cvalue} />
                 </div>
               ))}

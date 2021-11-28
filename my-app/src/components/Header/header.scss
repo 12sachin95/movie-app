@@ -1,26 +1,26 @@
 $bgcolor: rgb(24, 16, 16);
-$textcolor:#fff;
+$textcolor: #fff;
 @mixin afterpsudo {
-    content: "";
-    width: 0;
-    height: 3px;
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    background-color: #fff;
-    transition: all 0.5s ease-out;
+  content: "";
+  width: 0;
+  height: 3px;
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  background-color: #fff;
+  transition: all 0.5s ease-out;
 }
 .main_div {
   // width: 100%;
   height: 70px;
   background-color: $bgcolor;
-  color:$textcolor;
+  color: $textcolor;
   position: sticky;
   top: 0;
   z-index: 99;
-  @media (max-width:576px) {
-    height:60px;
-}
+  @media (max-width: 576px) {
+    height: 60px;
+  }
   .container {
     height: 100%;
     display: flex;
@@ -28,25 +28,25 @@ $textcolor:#fff;
     justify-content: space-between;
     h1 {
       font-weight: 500;
-      color:$textcolor;
+      color: $textcolor;
       font-size: 30px;
       text-transform: uppercase;
       cursor: pointer;
       position: relative;
       transition: all 0.5s ease-in;
-      @media (max-width:576px) {
+      @media (max-width: 576px) {
         font-size: 22px;
-    }
+      }
       &::after {
-        @include afterpsudo()
+        @include afterpsudo();
       }
-      &:hover{
-          letter-spacing: 1px;
-          transform: scale(1.05);
+      &:hover {
+        letter-spacing: 1px;
+        transform: scale(1.05);
       }
-      &:hover::after{
-      width: 100%;
-    }
+      &:hover::after {
+        width: 100%;
+      }
     }
     h2 {
       font-weight: 400;
@@ -56,22 +56,22 @@ $textcolor:#fff;
       transition: all 0.5s ease-in;
       padding: 5px 10px;
       border-radius: 10px;
-      border:1px solid #fff;
-      @media (max-width:576px) {
+      border: 1px solid #fff;
+      @media (max-width: 576px) {
         padding: 4px 8px;
         font-size: 16px;
-    }
+      }
       .far {
         margin-right: 5px;
       }
       &::after {
-        @include afterpsudo()
+        @include afterpsudo();
       }
-      &:hover{
-          letter-spacing: 1px;
-          transform: scale(1.05);
-          color:$bgcolor;
-          background-color: #fff;
+      &:hover {
+        letter-spacing: 1px;
+        transform: scale(1.05);
+        color: $bgcolor;
+        background-color: #fff;
       }
     }
   }
