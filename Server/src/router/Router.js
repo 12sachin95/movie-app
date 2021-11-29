@@ -10,7 +10,7 @@ router.post("/PostMovies", async (req, res) => {
     res.status(200).send("success");
     console.log(data);
   } catch (error) {
-    res.status(400).send(error);
+    res.status(400).send("message :", error.message);
   }
 });
 
@@ -19,7 +19,7 @@ router.get("/getmovies", async (req, res) => {
     const data = await MovieData.find({});
     res.status(200).json(data);
   } catch (error) {
-    res.status(400).send(error);
+    res.status(400).send("message :", error.message);
   }
 });
 
@@ -29,7 +29,7 @@ router.get("/getmovie/:id", async (req, res) => {
     const data = await MovieData.find({ id: id });
     res.status(200).json(data);
   } catch (error) {
-    res.status(400).send(error);
+    res.status(400).send("message :", error.message);
   }
 });
 
@@ -44,6 +44,6 @@ router.put("/updatemovie/:id", async (req, res) => {
     );
     res.status(200).send(movie);
   } catch (error) {
-    res.status(400).send(error.message);
+    res.status(400).send("message :", error.message);
   }
 });

@@ -7,11 +7,12 @@ import "./moviedetails.scss";
 const MovieDetails = () => {
   const [movie, setmovie] = useState([]);
   const { id } = useParams();
-  // console.log([movie.genres].toString());
 
   useEffect(() => {
     const getdata = async () => {
-      const data = await axios.get("/api/getmovie/" + id);
+      const data = await axios.get(
+        `${process.env.REACT_APP_URL}/getmovie/${id}`
+      );
       setmovie(data.data[0]);
     };
     getdata();

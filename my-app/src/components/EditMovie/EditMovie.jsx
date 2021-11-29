@@ -23,7 +23,10 @@ const EditMovie = () => {
   };
   const submitData = async (e) => {
     e.preventDefault();
-    await axios.put("/api/updatemovie/" + id, formvalue);
+    await axios.put(
+      `${process.env.REACT_APP_URL}/updatemovie/${id}`,
+      formvalue
+    );
     navigate("/");
   };
   return (

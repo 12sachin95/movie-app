@@ -1,5 +1,4 @@
 .tabs {
-  // background-color: #ddd;
   ul {
     display: flex;
     flex-wrap: wrap;
@@ -10,6 +9,7 @@
       font-size: 20px;
       cursor: pointer;
       border-radius: 20px;
+      text-transform: capitalize;
       border: 1px solid rgb(24, 16, 16);
       transition:all 0.5s ease;
       &:hover{
@@ -36,7 +36,6 @@
 }
 
 .tabs_small {
-  // background-color: #ddd;
   ul {
     display: flex;
     flex-wrap: wrap;

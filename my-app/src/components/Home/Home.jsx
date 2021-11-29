@@ -12,8 +12,9 @@ const Home = () => {
 
   useEffect(() => {
     const getMovies = async () => {
-      const Movies = await axios.get("/api/getmovies");
+      const Movies = await axios.get(`${process.env.REACT_APP_URL}/getmovies`);
       setmovieslist(Movies.data);
+      setFilteredMovies(Movies.data);
     };
     getMovies();
   }, []);
@@ -23,20 +24,29 @@ const Home = () => {
     setcategory(value);
     setFilteredMovies(filtred);
   };
-
+  const settingtab = (value) => {
+    if (value === "All Movie") {
+      settab("All Movie");
+      setFilteredMovies(movieslist);
+    } else {
+      settab("Genre");
+      setFilteredMovies([]);
+      setcategory("");
+    }
+  };
   return (
     <div className="container-fluid mt-3">
       <div className="tabs">
         <ul>
           <li
             className={tab === "All Movie" ? "active" : ""}
-            onClick={() => settab("All Movie")}
+            onClick={() => settingtab("All Movie")}
           >
             All Movies
           </li>
           <li
             className={tab === "Genre" ? "active" : ""}
-            onClick={() => settab("Genre")}
+            onClick={() => settingtab("Genre")}
           >
             Genre
           </li>
@@ -50,6 +60,7 @@ const Home = () => {
               <li
                 onClick={() => filtermovies(value)}
                 className={value === category ? "active" : ""}
+                style={{ textTransform: "capitalize" }}
               >
                 {value}
               </li>
@@ -61,7 +72,7 @@ const Home = () => {
       )}
       <div className="movie_list">
         <div className="row">
-          {tab === "All Movie" ? (
+          {/* {tab === "All Movie" ? (
             <>
               {movieslist.map((cvalue) => (
                 <div
@@ -73,17 +84,14 @@ const Home = () => {
               ))}
             </>
           ) : (
-            <>
-              {FilteredMovies.map((cvalue) => (
-                <div
-                  className="col-6 col-sm-4 col-md-3 col-lg-2"
-                  key={cvalue.id}
-                >
-                  <MovieCard movies={cvalue} />
-                </div>
-              ))}
-            </>
-          )}
+            <> */}
+          {FilteredMovies.map((cvalue) => (
+            <div className="col-6 col-sm-4 col-md-3 col-lg-2" key={cvalue.id}>
+              <MovieCard movies={cvalue} />
+            </div>
+          ))}
+          {/* </>
+          )} */}
         </div>
       </div>
     </div>
