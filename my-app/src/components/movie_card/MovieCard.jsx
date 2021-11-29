@@ -8,10 +8,10 @@ const MovieCard = ({ movies }) => {
         <img
           src={movies.posterurl}
           height="230px"
-          class="card-img-top"
+          className="card-img-top"
           alt="..."
         />
-        <div class="card_body">
+        <div className="card_body">
           <h5 className=" text-center my-2 fw-light">
             {movies.title.slice(0, 20)}
           </h5>

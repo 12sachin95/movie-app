@@ -50,7 +50,7 @@ const MovieDetails = () => {
               </div>
               <Link
                 type="button"
-                class="btn btn-dark mt-lg-3"
+                className="btn btn-dark mt-lg-3"
                 state={movie}
                 to={`/EditMovie/${movie.id}`}
               >
