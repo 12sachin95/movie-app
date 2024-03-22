@@ -7,8 +7,8 @@ import "./home.scss";
 const Home = () => {
   const [tab, settab] = useState("All Movie");
   const [movieslist, setmovieslist] = useState([]);
-  const [category, setcategory] = useState("");
-  const [FilteredMovies, setFilteredMovies] = useState([]);
+  const [category, setCategory] = useState("");
+  const [filteredMovies, setFilteredMovies] = useState([]);
 
   useEffect(() => {
     const getMovies = async () => {
@@ -19,19 +19,19 @@ const Home = () => {
     getMovies();
   }, []);
 
-  const filtermovies = (value) => {
+  const filterMovies = (value) => {
+    console.log(value, categories);
     const filtred = movieslist.filter((movie) => movie.genres.includes(value));
-    setcategory(value);
+    setCategory(value);
     setFilteredMovies(filtred);
   };
-  const settingtab = (value) => {
+  const settingTab = (value) => {
     if (value === "All Movie") {
       settab("All Movie");
       setFilteredMovies(movieslist);
     } else {
+      filterMovies(categories[0]);
       settab("Genre");
-      setFilteredMovies([]);
-      setcategory("");
     }
   };
   return (
@@ -40,13 +40,13 @@ const Home = () => {
         <ul>
           <li
             className={tab === "All Movie" ? "active" : ""}
-            onClick={() => settingtab("All Movie")}
+            onClick={() => settingTab("All Movie")}
           >
             All Movies
           </li>
           <li
             className={tab === "Genre" ? "active" : ""}
-            onClick={() => settingtab("Genre")}
+            onClick={() => settingTab("Genre")}
           >
             Genre
           </li>
@@ -58,7 +58,7 @@ const Home = () => {
           <ul>
             {categories.map((value) => (
               <li
-                onClick={() => filtermovies(value)}
+                onClick={() => filterMovies(value)}
                 className={value === category ? "active" : ""}
                 style={{ textTransform: "capitalize" }}
               >
@@ -85,7 +85,7 @@ const Home = () => {
             </>
           ) : (
             <> */}
-          {FilteredMovies.map((cvalue) => (
+          {filteredMovies.map((cvalue) => (
             <div className="col-6 col-sm-4 col-md-3 col-lg-2" key={cvalue.id}>
               <MovieCard movies={cvalue} />
             </div>

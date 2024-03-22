@@ -10,10 +10,14 @@ const MovieDetails = () => {
 
   useEffect(() => {
     const getdata = async () => {
-      const data = await axios.get(
-        `${process.env.REACT_APP_URL}/getmovie/${id}`
-      );
-      setmovie(data.data[0]);
+      try {
+        const data = await axios.get(
+          `${process.env.REACT_APP_URL}/getmovie/${id}`
+        );
+        setmovie(data.data[0]);
+      } catch (e) {
+        return console.log("===error", e);
+      }
     };
     getdata();
   }, [id]);
@@ -24,9 +28,8 @@ const MovieDetails = () => {
           <div className="col-md-4">
             <img
               src={movie.posterurl}
-              className="img-fluid rounded-start"
+              className="img-fluid rounded-start card_img"
               alt="movieimg"
-              className="card_img"
             />
           </div>
           <div className="col-md-8 d-flex align-items-center justify-content-spacebetween">

@@ -31,7 +31,7 @@ const EditMovie = () => {
   };
   return (
     <div className="container my-2">
-      <form className="row g-3">
+      <form className="row g-3" onSubmit={(e) => submitData(e) }>
         <div className="col-12">
           <label htmlFor="inputAddress" className="form-label">
             Movie Title
@@ -44,6 +44,7 @@ const EditMovie = () => {
             name="title"
             value={formvalue.title}
             onChange={(e) => gotofunction(e)}
+            required
           />
         </div>
         <div className="col-md-6">
@@ -62,6 +63,7 @@ const EditMovie = () => {
             name="year"
             value={formvalue.year}
             onChange={(e) => gotofunction(e)}
+            required
           />
         </div>
         <div className="col-md-6">
@@ -72,12 +74,14 @@ const EditMovie = () => {
             type="number"
             min="0"
             max="10"
+            step="0.1"
             className="form-control"
             id="inputAddress"
             placeholder="0-10"
             name="imdbRating"
             value={formvalue.imdbRating}
             onChange={(e) => gotofunction(e)}
+            required
           />
         </div>
         <div className="col-12">
@@ -92,6 +96,7 @@ const EditMovie = () => {
             name="genres"
             value={formvalue.genres}
             onChange={(e) => gotofunction(e)}
+            required
           />
         </div>
         <div className="col-12">
@@ -106,14 +111,15 @@ const EditMovie = () => {
             name="storyline"
             value={formvalue.storyline}
             onChange={(e) => gotofunction(e)}
+            required
           />
         </div>
 
         <div className="col-12">
           <button
-            type="button"
+            type="submit"
             className="btn btn-dark"
-            onClick={(e) => submitData(e)}
+         
           >
             Save Details
           </button>
