@@ -23,15 +23,12 @@ const EditMovie = () => {
   };
   const submitData = async (e) => {
     e.preventDefault();
-    await axios.put(
-      `${process.env.REACT_APP_URL}/updatemovie/${id}`,
-      formvalue
-    );
+    await axios.put(`/updatemovie/${id}`, formvalue);
     navigate("/");
   };
   return (
     <div className="container my-2">
-      <form className="row g-3" onSubmit={(e) => submitData(e) }>
+      <form className="row g-3" onSubmit={(e) => submitData(e)}>
         <div className="col-12">
           <label htmlFor="inputAddress" className="form-label">
             Movie Title
@@ -116,11 +113,7 @@ const EditMovie = () => {
         </div>
 
         <div className="col-12">
-          <button
-            type="submit"
-            className="btn btn-dark"
-         
-          >
+          <button type="submit" className="btn btn-dark">
             Save Details
           </button>
         </div>

@@ -12,7 +12,7 @@ const Home = () => {
 
   useEffect(() => {
     const getMovies = async () => {
-      const Movies = await axios.get(`${process.env.REACT_APP_URL}/getmovies`);
+      const Movies = await axios.get(`/getmovies`);
       setmovieslist(Movies.data);
       setFilteredMovies(Movies.data);
     };
