@@ -4,8 +4,9 @@ const userSchema = new mongoose.Schema(
   {
     googleId: String,
     username: String,
-    gmail: String,
-    image: String,
+    email: String,
+    // image: String,
+    password: String,
   },
   { timestamps: true }
 );

@@ -31,8 +31,8 @@ export const configurePassport = async () => {
           const user = {
             googleId: profile.id,
             username: profile.displayName,
-            gmail: profile.emails?.[0]?.value ?? "",
-            image: profile.photos?.[0]?.value ?? "",
+            email: profile.emails?.[0]?.value ?? "",
+            // image: profile.photos?.[0]?.value ?? "",
           };
           const newUser = await User.create(user);
           await newUser.save();
