@@ -1,20 +1,20 @@
 import express from "express";
 import { MovieData } from "../model/MovieModel.js";
+import { isAuthenticated } from "../model/utils/isAuthenticated.js";
 
 export const router = express.Router();
 
-router.post("/PostMovies", async (req, res) => {
+router.post("/PostMovies", isAuthenticated, async (req, res) => {
   try {
     const data = await new MovieData(req.body);
     await data.save();
     res.status(200).send("success");
-    console.log(data);
   } catch (error) {
     res.status(400).send("message :", error.message);
   }
 });
 
-router.get("/getmovies", async (req, res) => {
+router.get("/getmovies", isAuthenticated, async (req, res) => {
   try {
     const data = await MovieData.find({});
     res.status(200).json(data);
@@ -23,7 +23,7 @@ router.get("/getmovies", async (req, res) => {
   }
 });
 
-router.get("/getmovie/:id", async (req, res) => {
+router.get("/getmovie/:id", isAuthenticated, async (req, res) => {
   try {
     const id = req.params.id;
     const data = await MovieData.find({ id: id });
@@ -33,7 +33,7 @@ router.get("/getmovie/:id", async (req, res) => {
   }
 });
 
-router.put("/updatemovie/:id", async (req, res) => {
+router.put("/updatemovie/:id", isAuthenticated, async (req, res) => {
   try {
     const id = req.params.id;
     const genre = req.body.genres.toLowerCase().split(",");

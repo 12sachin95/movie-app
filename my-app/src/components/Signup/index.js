@@ -2,8 +2,9 @@ import React from "react";
 import "../Login/login.css";
 import { useNavigate } from "react-router";
 
-const Login = () => {
+const SignUp = () => {
   const navigate = useNavigate();
+
   const handleGoogle = () => {
     window.open("http://localhost:8080/auth/google", "_self");
   };
@@ -11,37 +12,30 @@ const Login = () => {
   return (
     <>
       <div className="login-page">
-        <h1 style={{ textAlign: "center" }}>Login</h1>
+        <h1 style={{ textAlign: "center" }}>SignUp</h1>
         <div className="form">
           <form className="login-form">
             <input type="text" name="" id="" placeholder="username" />
+            <input type="text" name="" id="" placeholder="email" />
+            <input type="text" name="" id="" placeholder="image" />
             <input type="password" name="" id="" placeholder="password" />
-            <button>Login</button>
+            <button>SignUp</button>
             <p className="message">
-              Not Registerd?{" "}
+              Allready have a account{" "}
               <span
                 style={{ cursor: "pointer", color: "#4caf50" }}
                 onClick={() => {
-                  navigate("/signup");
+                  navigate("/login");
                 }}
               >
-                Create an account
+                Log in
               </span>
             </p>
           </form>
-          <div className="w-full text-center my-3">Or</div>
-          <div className="w-full text-center">
-            <div
-              style={{ color: "#000", cursor: "pointer" }}
-              onClick={() => handleGoogle()}
-            >
-              Sign in with Google
-            </div>
-          </div>
         </div>
       </div>
     </>
   );
 };
 
-export default Login;
+export default SignUp;

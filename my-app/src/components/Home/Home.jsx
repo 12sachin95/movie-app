@@ -20,7 +20,6 @@ const Home = () => {
   }, []);
 
   const filterMovies = (value) => {
-    console.log(value, categories);
     const filtred = movieslist.filter((movie) => movie.genres.includes(value));
     setCategory(value);
     setFilteredMovies(filtred);

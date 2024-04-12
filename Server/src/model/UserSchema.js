@@ -3,11 +3,9 @@ import mongoose from "mongoose";
 const userSchema = new mongoose.Schema(
   {
     googleId: String,
-    displayName: String,
+    username: String,
     gmail: String,
     image: String,
-    firstName: String,
-    lastName: String,
   },
   { timestamps: true }
 );
