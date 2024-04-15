@@ -1,6 +1,6 @@
 import express from "express";
 import { MovieData } from "../model/MovieModel.js";
-import { isAuthenticated } from "../model/utils/isAuthenticated.js";
+import { isAuthenticated } from "../utils/isAuthenticated.js";
 
 export const router = express.Router();
 
