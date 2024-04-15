@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
+import axios from "axios";
 import "../Login/login.css";
 
 const validateEmail = (email) => {
@@ -18,18 +19,30 @@ const SignUp = () => {
   });
   const [error, setError] = useState(null);
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    const { username, email, password } = formData;
-    if (!username || !email || !password) {
-      setError("Please fill all the fields");
-    } else {
-      const isValid = validateEmail(email);
-      if (!isValid) {
-        setError("Please enter a valid email address");
-        return;
+    try {
+      const { username, email, password } = formData;
+      if (!username || !email || !password) {
+        setError("Please fill all the fields");
+      } else {
+        const isValid = validateEmail(email);
+        if (!isValid) {
+          setError("Please enter a valid email address");
+          return;
+        }
+        const userResponse = await axios.post(`/auth/signup`, {
+          username,
+          email,
+          password,
+        });
+        if (userResponse.status === 201) {
+          setError(null);
+          navigate("/login");
+        }
       }
-      console.log("===formData", formData);
+    } catch (error) {
+      setError(error.message ?? error);
     }
   };
 

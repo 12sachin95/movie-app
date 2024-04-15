@@ -1,32 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./header.scss";
+import axios from "axios";
 
 const Header = ({ user, setUser }) => {
-  const logout = () => {
-    window.open("http://localhost:8080/auth/logout", "_self");
+  const logout = async () => {
+    // window.open("http://localhost:8080/auth/logout", "_self");
+    const res = await axios.get("/auth/logout");
+    console.log(res);
     setUser(null);
-    // fetch("/auth/logout", {
-    //   method: "GET",
-    //   credentials: "include",
-    //   headers: {
-    //     Accept: "application/json",
-    //     "Content-Type": "application/json",
-    //     "Access-Control-Allow-Credentials": true,
-    //   },
-    // })
-    //   .then((response) => {
-    //     if (response.status === 200) return response.json();
-    //     throw new Error("authentication has been failed!");
-    //   })
-    //   .then((resObject) => {
-    //     setUser(null);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //     // setUser(null);
-    //     // navigate("/login");
-    //   });
   };
   return (
     <div className="main_div">
@@ -39,7 +21,7 @@ const Header = ({ user, setUser }) => {
             <li className="listItem">
               {/* <img src={user.photos?.[0]?.value} alt="" className="avatar" /> */}
             </li>
-            <li className="listItem">{user.displayName}</li>
+            <li className="listItem">{user.username}</li>
             <li
               className="listItem"
               style={{ cursor: "pointer" }}

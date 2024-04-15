@@ -1,5 +1,7 @@
 import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
+import { Strategy as LocalStrategy } from "passport-local";
+import bcrypt from "bcryptjs";
 import User from "./model/UserSchema.js";
 
 export const configurePassport = async () => {
@@ -42,5 +44,29 @@ export const configurePassport = async () => {
         }
       }
     )
+  );
+
+  passport.use(
+    new LocalStrategy(async (username, password, done) => {
+      try {
+        // Adjust this callback to your needs
+        const user = await User.findOne({ username });
+        if (!user) {
+          return done(null, false, {
+            message: "wrong email or password",
+          });
+        }
+        const validPassword = await bcrypt.compare(password, user.password);
+        if (!validPassword) {
+          return done(null, false, {
+            message: "wrong email or password",
+          });
+        }
+
+        return done(null, user);
+      } catch (error) {
+        return done(error);
+      }
+    })
   );
 };

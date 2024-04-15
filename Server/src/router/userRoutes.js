@@ -1,5 +1,7 @@
 import express from "express";
 import passport from "passport";
+import bcrypt from "bcryptjs";
+import User from "../model/UserSchema.js";
 
 const router = express.Router();
 
@@ -48,7 +50,7 @@ router.get("/logout", (req, res) => {
     if (err) {
       return res.status(500).send("Logout failed");
     } // Handle errors (optional)
-    res.redirect(CLIENT_URL); // Redirect to homepage after logout
+    res.status(200).send("Logout successfull"); //redirect to homepage after logout
   });
   // res.redirect(CLIENT_URL);
 });
@@ -65,5 +67,36 @@ router.get(
     failureRedirect: "/auth/login/failed",
   })
 );
+
+router.post("/signup", async (req, res) => {
+  try {
+    const { username, email, password } = req.body;
+
+    if (!username || !email || !password) {
+      throw new Error("All fields are required");
+    }
+    const existingUser = await User.findOne({ username });
+    if (existingUser) {
+      throw new Error("User already exists");
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    const newUser = new User({
+      username,
+      email,
+      password: hashedPassword,
+    });
+    await newUser.save();
+    res.status(201).json({ message: "User created successfully" });
+  } catch (err) {
+    res.status(500).json({ message: "Error creating user" });
+  }
+});
+
+router.post("/signin", passport.authenticate("local"), function (req, res) {
+  res.status(200).json({ message: "login successfull", data: req.user });
+});
 
 export default router;
