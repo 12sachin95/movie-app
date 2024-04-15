@@ -39,7 +39,7 @@ function App() {
   useEffect(() => {
     setLoading(true);
     getUser();
-  }, [user]);
+  }, []);
 
   return (
     <BrowserRouter>

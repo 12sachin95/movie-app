@@ -12,9 +12,15 @@ const Home = () => {
 
   useEffect(() => {
     const getMovies = async () => {
-      const Movies = await axios.get(`/getmovies`);
-      setmovieslist(Movies.data);
-      setFilteredMovies(Movies.data);
+      try {
+        const movies = await axios.get(`/getmovies`);
+        if (movies.data) {
+          setmovieslist(movies.data);
+          setFilteredMovies(movies.data);
+        }
+      } catch (error) {
+        console.log(error);
+      }
     };
     getMovies();
   }, []);
@@ -84,7 +90,7 @@ const Home = () => {
             </>
           ) : (
             <> */}
-          {filteredMovies.map((cvalue) => (
+          {(filteredMovies ?? [])?.map((cvalue) => (
             <div className="col-6 col-sm-4 col-md-3 col-lg-2" key={cvalue.id}>
               <MovieCard movies={cvalue} />
             </div>

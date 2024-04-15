@@ -3,6 +3,18 @@ import "../Login/login.css";
 import { useNavigate } from "react-router";
 import axios from "axios";
 
+// Run only on initial render
+
+// const LoginButton = () => {
+//   const handleLoginClick = () => {
+//     const redirectUri = "http://localhost:8080/auth/google/callback"; // Replace with your callback URL
+//     const url = `https://accounts.google.com/o/oauth2/v2/auth?client_id=260549226857-2kauedevhediellcf16ufdag38vhbc6l.apps.googleusercontent.com&redirect_uri=${redirectUri}&scope=profile+email&response_type=code`;
+//     window.location.href = url;
+//   };
+
+//   return <button onClick={handleLoginClick}>Login with Google</button>;
+// };
+
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -63,14 +75,10 @@ const Login = () => {
             </p>
           </form>
           <div className="w-full text-center my-3">Or</div>
-          <div className="w-full text-center">
-            <div
-              style={{ color: "#000", cursor: "pointer" }}
-              onClick={() => handleGoogle()}
-            >
-              Sign in with Google
-            </div>
+          <div className="w-full text-center my-2">
+            <button onClick={() => handleGoogle()}>Sign in with Google</button>
           </div>
+          {/* <LoginButton /> */}
         </div>
       </div>
     </>
